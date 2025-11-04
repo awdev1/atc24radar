@@ -118,7 +118,7 @@ function getHighestZIndex() {
     return highest;
 }
 
-function overlaySetup(overlay){
+function overlaySetup(overlay) {
     let currentX;
     let currentY;
     overlay.style.zIndex = '100';
@@ -149,7 +149,7 @@ function overlaySetup(overlay){
 
         x = currentX + dx + parseInt(getComputedStyle(overlay).getPropertyValue('left'), 10) < 0 || currentX + dx + parseInt(getComputedStyle(overlay).getPropertyValue('left'), 10) + overlay.offsetWidth > window.innerWidth ? lastX : currentX + dx;
         y = currentY + dy + parseInt(getComputedStyle(overlay).getPropertyValue('top'), 10) < 0 || currentY + dy + parseInt(getComputedStyle(overlay).getPropertyValue('top'), 10) + overlay.offsetHeight > window.innerHeight ? lastY : currentY + dy;
-        
+
         overlay.style.transform = `translate(${x}px, ${y}px)`;
         lastX = x
         lastY = y
@@ -162,7 +162,7 @@ function overlaySetup(overlay){
         }
         isDraggingOverlay = false;
     });
-    
+
     const closeButton = overlay.querySelector('.close-svg');
 
     closeButton.addEventListener('click', () => {
@@ -254,7 +254,7 @@ function drawFixes() {
             icon = fixSVG;
         } else if (fix.type == 'vortac') {
             icon = vortacSVG;
-        } else if (fix.type == 'vordme') { 
+        } else if (fix.type == 'vordme') {
             icon = vordmeSVG;
         }
         // Your custom SVG for a fix (as a string), using a <g> with transform
@@ -271,7 +271,7 @@ function drawFixes() {
     // Assign all at once
     svg.innerHTML += svgContent;
 
-    fixSize = parseFloat(fixSizeInput.value)/10;
+    fixSize = parseFloat(fixSizeInput.value) / 10;
     document.querySelectorAll('.fix-svg').forEach(el => {
         el.querySelector('svg').setAttribute('width', fixSize * currentZoom);
         el.querySelector('svg').setAttribute('height', fixSize * currentZoom);
@@ -373,7 +373,7 @@ function loadAirportData(airportSelector) {
             alert('Error loading groundview: ' + err.message);
         });
 
-    
+
     const stationCenter = stationMap.get(folder);
     const stationType = airportInfo[folder].frequency.CTR == null ? 'TWR' : 'CTR';
     document.querySelector('#station-info').innerHTML = `${stationCenter}-${stationType} (${currentAtisCode})`
@@ -483,8 +483,8 @@ function loadGroundChartSVG(airportSelector, cont) {
             const taxiwaysSVG = parseSVG(taxiwaysText);
             taxiwaysSVG.setAttribute('id', 'taxiwaysCenter-svg');
             mapSvg.appendChild(taxiwaysSVG);
-            
-            
+
+
             const textElements = Array.from(taxiwaysSVG.querySelectorAll('g')).find(el => el.getAttribute('id')).querySelectorAll('text');
             textElements.forEach(el => {
                 const baseFontSize = 0.4;
@@ -495,7 +495,7 @@ function loadGroundChartSVG(airportSelector, cont) {
                     const baseFontSize = 0.4;
                     el.setAttribute('style', `font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:${baseFontSize * groundCurrentZoom / groundOffsetsMap.get(folder).zoom}px;font-family:Montserrat;-inkscape-font-specification:Montserrat;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#999999;fill-opacity:1;stroke-width:1;stroke-dasharray:none`);
                 });
-            });            
+            });
         })
         .catch(err => {
             console.error(err);
@@ -570,26 +570,26 @@ airspaceBoundsCheck.addEventListener('change', () => {
 });
 
 fontSizeInput.addEventListener('change', () => {
-    labelFontSize = parseFloat(fontSizeInput.value)/10;
+    labelFontSize = parseFloat(fontSizeInput.value) / 10;
     updateAircraftLayer(aircraftData);
 });
 
 fontSizeInputGround.addEventListener('change', () => {
-    groundLabelFontSize = parseFloat(fontSizeInputGround.value)/10;
+    groundLabelFontSize = parseFloat(fontSizeInputGround.value) / 10;
     document.querySelectorAll('#ground-container').forEach(cont => {
         updateGroundAircraftLayer(aircraftData, cont);
     });
 });
 
 fixFontSizeInput.addEventListener('change', () => {
-    fixFontSize = parseFloat(fixFontSizeInput.value)/10;
+    fixFontSize = parseFloat(fixFontSizeInput.value) / 10;
     document.querySelectorAll('.fix-svg').forEach(el => {
         el.querySelector('text').setAttribute('font-size', fixFontSize * currentZoom);
     });
 });
 
 fixSizeInput.addEventListener('change', () => {
-    fixSize = parseFloat(fixSizeInput.value)/10;
+    fixSize = parseFloat(fixSizeInput.value) / 10;
     document.querySelectorAll('.fix-svg').forEach(el => {
         el.querySelector('svg').setAttribute('width', fixSize * currentZoom);
         el.querySelector('svg').setAttribute('height', fixSize * currentZoom);
@@ -622,7 +622,7 @@ displayButton.addEventListener('click', () => {
         expandCollapse();
         return;
     }
-    if (container.style.width == '50vw'){
+    if (container.style.width == '50vw') {
         displayButton.style.left = '10px';
         container.style.width = '100vw';
         sideDisplay.style.width = '0';
@@ -693,8 +693,8 @@ document.getElementById('min-tool').addEventListener('click', () => {
         width: 100vw;
         border-radius: 0;
         font-size: .7em;
-    ` : 
-    topBar.style.cssText = '';
+    ` :
+        topBar.style.cssText = '';
 
     const backButton = document.getElementById('side-window-1').querySelector('.back-button');
     console.log(backButton);
@@ -710,7 +710,7 @@ document.getElementById('fix-button').addEventListener('click', () => {
         drawFixes();
     } else {
         document.querySelectorAll('.fix-svg').forEach(el => el.remove());
-    }    
+    }
 })
 
 document.getElementById('notepad-icon').addEventListener('click', () => {
@@ -931,8 +931,8 @@ function MultiselectDropdown(options) {
         });
 
         document.addEventListener('click', function (event) {
-            
-            if (!div.contains(event.target) && !event.target.classList.contains('atis-dropdown') ) {
+
+            if (!div.contains(event.target) && !event.target.classList.contains('atis-dropdown')) {
                 listWrap.style.display = 'none';
                 div.refresh();
             }
@@ -969,7 +969,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Delete') {
         if (hoveredVector) {
             hoveredVector.remove();
-            hoveredVector = null; 
+            hoveredVector = null;
         }
 
         if (isMeasuring) {
@@ -989,7 +989,7 @@ document.addEventListener('keydown', (e) => {
 function extractVectorData() {
     const svg = document.getElementById("vector-container");
     if (!svg.innerHTML) {
-        alert('No vectors to export'); 
+        alert('No vectors to export');
         return;
     }
     const vectors = svg.querySelectorAll('.vector');
@@ -999,7 +999,7 @@ function extractVectorData() {
         const color = vector.getAttribute('color');
         const distanceDisplayed = vector.getAttribute('distance') === 'true';
         const dirOnly = vector.getAttribute('dirOnly') === 'true';
-        
+
         const line = vector.querySelector('line');
         const factor = parseFloat(line.getAttribute('factor'));
         const x1 = parseFloat(line.getAttribute('x1'));
@@ -1023,28 +1023,28 @@ document.getElementById('vector-export').addEventListener('click', () => {
     const vectorData = extractVectorData();
     if (!vectorData) return;
     const fileName = prompt("Enter the file name (without extension):", "vector_data");
-      if (fileName) {
+    if (fileName) {
         const blob = new Blob([JSON.stringify(vectorData, null, 2)], { type: 'application/json' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = `${fileName}.json`;  // Use the user-specified file name
         link.click();
-      } else {
+    } else {
         alert("Export cancelled. No file name provided.");
-      }
+    }
 });
 
 document.getElementById('vector-import').addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
-    
+
     // When a file is selected, read it
-    input.onchange = function(event) {
+    input.onchange = function (event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const vectorData = JSON.parse(e.target.result);
                 console.log('Imported Data:', vectorData);
                 createVectorElement(vectorData);
@@ -1114,7 +1114,7 @@ function createVectorElement(vectorData) {
             distance.textContent = `${Math.round(heading)}`;
             group.setAttribute("dirOnly", true);
         }
-            
+
 
         distance.setAttribute("x", (data.coordinates.x1 + data.coordinates.x2) / 2);
         distance.setAttribute("y", (data.coordinates.y1 + data.coordinates.y2) / 2);
@@ -1190,8 +1190,8 @@ function generateATIS() {
     const charts = document.getElementById('charts').value;
     const depRwys = Array.from(document.getElementById('depRwy').selectedOptions).map(opt => opt.value).join(' ');;
     const arrRwys = Array.from(document.getElementById('arrRwy').selectedOptions).map(opt => opt.value).join(' ');;
-    
-    const time = new Date().toISOString().slice(11,16).replace(':','') + 'z';
+
+    const time = new Date().toISOString().slice(11, 16).replace(':', '') + 'z';
 
     const windParts = Object.values(aircraftData)[0]?.wind.split("/");
     const dir = windParts[0].padStart(3, '0');
@@ -1200,7 +1200,7 @@ function generateATIS() {
     const chartsLink = charts == 'Offical' ? `https://github.com/Treelon/ptfs-charts/tree/main/${airportInfo[airportSelector.value].ChartsLinkPath}` : '';
 
     const atis =
-    `${airportSelector.value} ATIS INFO ${code} TIME ${time}
+        `${airportSelector.value} ATIS INFO ${code} TIME ${time}
 DEP RWY ${depRwys} ARR RWY ${arrRwys}
 ${dir}/${speed} 9999 OVC045 00/06 Q${qnh}
 ACKNOWLEDGE RECEIPT OF INFORMATION ${code}
@@ -1226,7 +1226,7 @@ function setWinds() {
     const windParts = Object.values(aircraftData)[0]?.wind.split("/");
     const dir = windParts[0].padStart(3, '0')
     const speed = windParts[1].padStart(2, '0')
-    document.getElementById('wind-container').innerHTML = `W: ${dir}/${speed}`; 
+    document.getElementById('wind-container').innerHTML = `W: ${dir}/${speed}`;
 }
 
 window.addEventListener('load', function () {
@@ -1252,7 +1252,7 @@ window.addEventListener('load', function () {
 
             backButton.addEventListener('click', () => {
                 Array.from(container.children).forEach(child => {
-                    if (child.classList.contains('sidebar-button') || child.classList.contains('side-window-button')){
+                    if (child.classList.contains('sidebar-button') || child.classList.contains('side-window-button')) {
                         child.style.display = 'block';
                     } else {
                         child.remove();
@@ -1261,7 +1261,7 @@ window.addEventListener('load', function () {
             });
 
             //find corret function, can replace with switch later
-            if (id == 'groundview-button'){
+            if (id == 'groundview-button') {
                 loadGroundDisplay(button.parentElement)
             } else if (id == 'charts-button') {
                 addAirportChart(button.parentElement);
@@ -1307,7 +1307,7 @@ async function fetchData() {
     try {
         const response = await fetch(`http${secureProtocol}://${serverAddress}/data`);
         if (!response.ok) throw new Error("Network response was not ok");
-        
+
         const enrichedAircraftMap = await response.json();
         aircraftData = enrichedAircraftMap;
         updateAircraftLayer(enrichedAircraftMap);
@@ -1344,7 +1344,7 @@ async function loadApproachList(icao) {
     container.innerHTML = ''; // clear previous toggles
 
     files.forEach(file => {
-        
+
         const label = document.createElement('label');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -1393,14 +1393,14 @@ async function fetchAtisLetter(icao) {
 
 let departuresElements = {};
 let departuresTimestamps = {};
-function updateDepartures(data){
+function updateDepartures(data) {
     const newIds = new Set();
 
     //add new rows
     for (const [id, info] of Object.entries(data)) {
         const fp = info.flightPlan;
         if (!fp || !currentStations.has(fp.departing) || (fp.flightStatus === "landed" || info.flightStatus === "desceding" || info.flightStatus === "inFlight")) continue;
-        
+
         newIds.add(id);
 
         const currentAltitude = parseInt(info.altitude);
@@ -1425,10 +1425,10 @@ function updateDepartures(data){
             }
             delete departuresElements[id];
             delete departuresTimestamps[id];
-            
+
             continue;
         }
-        
+
         const currentTimestamp = fp.timestamp;
 
         if (!departuresElements[id] || departuresTimestamps[id] !== currentTimestamp) {
@@ -1468,7 +1468,7 @@ function addDepartureRow(info, id) {
         { name: 'rwy', type: 'text', value: '' },
         { name: 'sid', type: 'text', value: '' },
         { name: 'climb', type: 'text', value: fp.flightlevel || '' },
-        { name: 'c', type: 'checkbox',},
+        { name: 'c', type: 'checkbox', },
         { name: 'rmk', type: 'text', value: '' },
     ];
 
@@ -1501,7 +1501,7 @@ function addDepartureRow(info, id) {
             input.autocomplete = 'off';
             cell.appendChild(input);
 
-             input.addEventListener('change', () => {
+            input.addEventListener('change', () => {
                 if (input.checked) {
                     input.dataset.checkedAt = Date.now();
                 } else {
@@ -1572,14 +1572,14 @@ function reorderDepartureRows() {
 
 let arrivalsElements = {};
 let arrivalsTimestamps = {};
-function updateArrivals(data){
+function updateArrivals(data) {
     const newIds = new Set();
 
     //add new rows
     for (const [id, info] of Object.entries(data)) {
         const fp = info.flightPlan;
         if (!fp || !currentStations.has(fp.arriving) || info.isOnGround) continue;
-        
+
         newIds.add(id);
 
         const currentAltitude = parseInt(info.altitude);
@@ -1592,10 +1592,10 @@ function updateArrivals(data){
             }
             delete arrivalsElements[id];
             delete arrivalsTimestamps[id];
-            
+
             continue;
         }
-        
+
         const currentTimestamp = fp.timestamp;
 
         if (!arrivalsElements[id] || arrivalsTimestamps[id] !== currentTimestamp) {
@@ -1685,7 +1685,7 @@ function preserveFocusWhileUpdating(updateFunction) { //note
     const selectionEnd = activeEl.selectionEnd;
 
     updateFunction();
-    
+
     const tableBody = activeEl.parentElement.parentElement.parentElement;
     const row = tableBody.querySelector(`#${rowId}`)
     const input = row.querySelector(`input[name="${inputName}"]`);
@@ -1740,16 +1740,16 @@ function addAirportChart(container) {
     wrapper.appendChild(rotateBtn);
 
     img.onload = () => {
-        let transform = { 
-            x: 0, 
-            y: 0, 
-            scale: container.clientWidth / img.naturalHeight, 
-            rotation: 90 
+        let transform = {
+            x: 0,
+            y: 0,
+            scale: container.clientWidth / img.naturalHeight,
+            rotation: 90
         };
 
         function updateTransform() {
             previousChartTransform = transform;
-            img.style.transform = 
+            img.style.transform =
                 `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale}) rotate(${transform.rotation}deg)`;
         }
 
@@ -1802,16 +1802,24 @@ function addAirportChart(container) {
 
         wrapper.addEventListener("wheel", (e) => {
             e.preventDefault();
-            
+
             const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
             const newScale = transform.scale * zoomFactor;
 
             if (newScale < 0.25250351893095774 || newScale > 1.1776727859952076) {
                 return;
             }
+
+            const rect = wrapper.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            transform.x = mouseX - ((mouseX - transform.x) * (newScale / transform.scale));
+            transform.y = mouseY - ((mouseY - transform.y) * (newScale / transform.scale)); 
             transform.scale = newScale;
             updateTransform();
+            // solved issue with random zoom jumps.  -awdev1 11/04/2024
         });
+
     };
 
     img.onerror = () => {
@@ -1861,7 +1869,7 @@ function updateGroundAircraftLayer(data, cont) {
 
             const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
             label.setAttribute("fill", "white");
-            label.setAttribute('font-size', groundLabelFontSize/30 * groundCurrentZoom/groundOffsetsMap.get(airportSelector.value).zoom * document.getElementById('label-size-slider').value);
+            label.setAttribute('font-size', groundLabelFontSize / 30 * groundCurrentZoom / groundOffsetsMap.get(airportSelector.value).zoom * document.getElementById('label-size-slider').value);
             label.classList.add("ground-aircraft-label");
             label.setAttribute('id', "aircraft-label");
             label.setAttribute("x", defaultLabelOffset * groundCurrentZoom); // offset for label
@@ -1963,13 +1971,13 @@ function updateGroundLabel(group, info, id) {
         if (currentStations.has(info.flightPlan.arriving)) {
             color = '#fce241';
         }
-        if (info.flightPlan.flightrules == 'VFR' && (currentStations.has(info.flightPlan.departing) || currentStations.has(info.flightPlan.arriving))){
+        if (info.flightPlan.flightrules == 'VFR' && (currentStations.has(info.flightPlan.departing) || currentStations.has(info.flightPlan.arriving))) {
             color = '#48fb99ff';
         }
         text.setAttribute("fill", color);
     }
 
-    label.setAttribute('font-size', groundLabelFontSize/30 * groundCurrentZoom/groundOffsetsMap.get(airportSelector.value).zoom * document.getElementById('label-size-slider').value);
+    label.setAttribute('font-size', groundLabelFontSize / 30 * groundCurrentZoom / groundOffsetsMap.get(airportSelector.value).zoom * document.getElementById('label-size-slider').value);
 
 
     const callsignParts = id.split("-");
@@ -2142,7 +2150,7 @@ function updateAircraftLayer(data) {
             document.addEventListener('mousemove', e => {
                 if (isDraggingLabel.bool == true) labelMove(e, label, svg, group, start);
                 if (isMeasuring == true) {
-                    
+
                     const pt = svg.createSVGPoint();
                     pt.x = e.clientX;
                     pt.y = e.clientY;
@@ -2246,11 +2254,11 @@ function getPlaneIcon(type, group, heading) {
     } else {
         svgPath = `public/assets/plane-Icons/${aircraftIconMap.get(type)}.svg`;
     }
-    
+
 
     fetch(svgPath)
         .then(response => {
-            if (!response.ok) throw new Error('Failed to load plane SVG of type: ' + type + ', error:'+ response.status);
+            if (!response.ok) throw new Error('Failed to load plane SVG of type: ' + type + ', error:' + response.status);
             return response.text();
         })
         .then(svgText => {
@@ -2409,7 +2417,7 @@ function updateLabel(group, info, id) {
         if (currentStations.has(info.flightPlan.arriving)) {
             color = '#fce241';
         }
-        if (info.flightPlan.flightrules == 'VFR' && (currentStations.has(info.flightPlan.departing) || currentStations.has(info.flightPlan.arriving))){
+        if (info.flightPlan.flightrules == 'VFR' && (currentStations.has(info.flightPlan.departing) || currentStations.has(info.flightPlan.arriving))) {
             color = '#48fb99ff';
         }
         text.setAttribute("fill", color);
@@ -2483,7 +2491,7 @@ function updateMeasuringTool(x, y) {
         textStart.textContent = '';
         textEnd.textContent = '';
     }
-    
+
     textDistance.setAttribute("x", (measuringLineStart.x + x) / 2);
     textDistance.setAttribute("y", (measuringLineStart.y + y) / 2);
     textDistance.setAttribute("font-size", 12 * currentZoom);
@@ -2546,7 +2554,7 @@ function fetchMapLayerGround(container) {
             slider.addEventListener('input', () => {
                 const labels = svg.querySelectorAll('.ground-aircraft-label');
                 labels.forEach(label => {
-                    label.setAttribute('font-size', groundLabelFontSize/30 * groundCurrentZoom/groundOffsetsMap.get(airportSelector.value).zoom * slider.value);
+                    label.setAttribute('font-size', groundLabelFontSize / 30 * groundCurrentZoom / groundOffsetsMap.get(airportSelector.value).zoom * slider.value);
                 });
             });
 
