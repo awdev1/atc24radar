@@ -1326,7 +1326,7 @@ async function fetchData() {
         console.error("Error fetching data:", error);
     }
 }
-setInterval(fetchData, 3000);
+setInterval(fetchData, 1000);
 
 async function loadApproachList(icao) {
     let paths;
